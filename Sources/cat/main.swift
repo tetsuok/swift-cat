@@ -15,7 +15,7 @@
 #if os(Linux)
 import Glibc
 #else
-import DarwinC
+import Darwin.C
 #endif
 
 enum CatError : Error {
