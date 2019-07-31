@@ -19,6 +19,7 @@ jobs:
         - swift build
         - swift build -c release
         - swift test
+        - bash ./Tests/runtest
     - stage: macOS
       os: osx
       osx_image: xcode11
@@ -33,3 +34,4 @@ jobs:
         - swift build
         - swift build -c release
         - swift test
+        - bash ./Tests/runtest
