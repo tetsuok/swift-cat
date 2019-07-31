@@ -10,7 +10,7 @@ jobs:
       dist: bionic
       sudo: required
       install:
-        - sudo apt install clang libicu-dev libpython-all-dev
+        - sudo apt install libicu-dev libpython-all-dev
         - mkdir local
         - curl https://swift.org/builds/$SWIFT_RELEASE/ubuntu1804/$SWIFT_VERSION/$SWIFT_VERSION-ubuntu18.04.tar.gz
           -s | tar xz -C local
