@@ -12,7 +12,7 @@ jobs:
       install:
         - sudo apt install libicu-dev
         - mkdir local
-        - curl https://swift.org/builds/$SWIFT_RELEASE/ubuntu1804/$SWIFT_VERSION/$SWIFT_VERSION-ubuntu18.04.tar.gz
+        - curl https://swift.org/builds/$SWIFT_BRANCH/ubuntu1804/$SWIFT_VERSION/$SWIFT_VERSION-ubuntu18.04.tar.gz
           -s | tar xz -C local
         - export PATH="$PATH:$(pwd)/local/$SWIFT_VERSION-ubuntu18.04/usr/bin"
       script:
