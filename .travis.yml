@@ -1,12 +1,30 @@
-os:
-  - linux
-  - osx
-
-language: swift
-sudo: required
-osx_image: xcode11
-dist: trusty
-script:
-  swift build -c release
-  swift run cat README.md
-  swift test
+env:
+  global:
+    - SWIFT_BRANCH=swift-5.0.2-release
+    - SWIFT_VERSION=swift-5.0.2-RELEASE
+jobs:
+  include:
+    - stage: Linux
+      os: linux
+      language: generic
+      dist: bionic
+      sudo: required
+      install:
+        - sudo apt install clang libicu-dev libpython-all-dev
+        - mkdir local
+        - curl https://swift.org/builds/$SWIFT_RELEASE/ubuntu1804/$SWIFT_VERSION/$SWIFT_VERSION-ubuntu18.04.tar.gz
+          -s | tar xz -C local
+        - export PATH="$PATH:$(pwd)/local/$SWIFT_VERSION-ubuntu18.04/usr/bin"
+      script:
+        - swift build -c release
+        - swift test
+    - stage: macOS
+      os: osx
+      osx_image: xcode11
+      language: swift
+      sudo: required
+      install:
+        - curl -O https://swift.org/builds/$SWIFT_BRANCH/xcode/$SWIFT_VERSION/$SWIFT_VERSION-osx.pkg
+        - sudo installer -pkg $SWIFT_VERSION-osx.pkg -target /
+      script:
+        - xcrun --toolchain swift -version
