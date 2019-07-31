@@ -27,8 +27,9 @@ jobs:
       install:
         - curl -O https://swift.org/builds/$SWIFT_BRANCH/xcode/$SWIFT_VERSION/$SWIFT_VERSION-osx.pkg
         - sudo installer -pkg $SWIFT_VERSION-osx.pkg -target /
+        - export PATH="$PATH:$(dirname xcrun --toolchain swift -f swift)"
       script:
-        - xcrun --toolchain swift swift -version
-        - xcrun --toolchain swift swift build
-        - xcrun --toolchain swift swift build -c release
-        - xcrun --toolchain swift swift test
+        - swift -version
+        - swift build
+        - swift build -c release
+        - swift test
